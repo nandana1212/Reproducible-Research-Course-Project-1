@@ -39,13 +39,13 @@ str(initialData)
 The question states any missing values in the data set can be ignored. From using the summary functions previously, it is already known that there are NA values within the steps variable, so these can be removed now.
 
 ```{r}
-data <- initialData[!(is.na(initialData$steps)), ]
+data <-initialData[!(is.na(initialData$steps)), ]
 ```
 
 To calculate the total number of steps taken per day, the data first needs to be grouped separately for each day, and then the sum of each group calculated. The aggregate function can complete both of these steps, and format the output in a tidy data frame.
 
 ```{r}
-totalStepsDay <- aggregate(steps ~ date, data, sum)
+totalStepsDay <-aggregate(steps ~ date, data, sum)
 head(totalStepsDay)
 ```
 
@@ -53,7 +53,7 @@ Creating exploratory plots are useful to be able to quickly see a view of all of
 
 
 ```{r}
-paletteBlue <- colorRampPalette(c("skyblue", "darkblue", "skyblue"))
+paletteBlue <-colorRampPalette(c("skyblue", "darkblue", "skyblue"))
 hist(totalStepsDay$steps, breaks=20, xlab="Number of Steps Taken", 
      main="Histogram of the Total Number of Steps Taken per Day",
      col=paletteBlue(22), family="serif")
@@ -119,7 +119,7 @@ Therefore an imputing strategy must be devised to replace all of these missing v
 I used a for loop to achieve this, first testing if each observation was an NA value, and if so, replacing it with the mean average for that interval, (as calculated in a previous question).
 
 ```{r}
-imputedData <- initialData
+imputedData <-initialData
 for(x in 1:17568) {
     if(is.na(imputedData[x, 1])==TRUE) {
         imputedData[x, 1] <- meanStepsInterval[meanStepsInterval$interval %in% imputedData[x, 3], 2]
