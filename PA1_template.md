@@ -25,7 +25,7 @@ The data must be in the user's current working directory for the code to run cor
 
 ```r
 unzip("activity.zip")
-initialData <- read.csv("activity.csv", colClasses=c("numeric", "Date", "numeric"))
+initialData<- read.csv("activity.csv", colClasses=c("numeric", "Date", "numeric"))
 ```
 
 An initial look at the data confirms its dimensions and contents.
@@ -62,7 +62,7 @@ The question states any missing values in the data set can be ignored. From usin
 
 
 ```r
-data <- initialData[!(is.na(initialData$steps)), ]
+data <-initialData[!(is.na(initialData$steps)), ]
 ```
 
 To calculate the total number of steps taken per day, the data first needs to be grouped separately for each day, and then the sum of each group calculated. The aggregate function can complete both of these steps, and format the output in a tidy data frame.
@@ -88,7 +88,7 @@ Creating exploratory plots are useful to be able to quickly see a view of all of
 
 
 ```r
-paletteBlue <- colorRampPalette(c("skyblue", "darkblue", "skyblue"))
+paletteBlue <-colorRampPalette(c("skyblue", "darkblue", "skyblue"))
 hist(totalStepsDay$steps, breaks=20, xlab="Number of Steps Taken", 
      main="Histogram of the Total Number of Steps Taken per Day",
      col=paletteBlue(22), family="serif")
@@ -119,7 +119,7 @@ To look at the average daily pattern, we can use another exploratory graph, this
 
 
 ```r
-meanStepsInterval <- aggregate(steps ~ interval, data, mean)
+meanStepsInterval <-aggregate(steps ~ interval, data, mean)
 head(meanStepsInterval)
 ```
 
@@ -329,7 +329,7 @@ To achieve this, I used the weekdays function to automatically calculate the day
 
 
 ```r
-daysData <- imputedData
+daysData <-imputedData
 daysData$days <- weekdays(daysData$date)
 daysData$weekday <- as.character(rep(0, times=17568))
 for(x in 1:17568) {
